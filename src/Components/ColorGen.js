@@ -74,7 +74,7 @@ const ColorData = () => {
         colorsGenerated.map((color, index) => {
             return(
                 <div>
-                    <div key={index} style={{ backgroundColor: color, width: '5px', height: '5px', padding: '.2px' }} className="color-chunks"></div>
+                    <div key={index} style={{ backgroundColor: color, width: '5px', height: '5px', padding: '.4px', margin: '.2px' }} className="color-chunks"></div>
                 </div>
             )
         })
