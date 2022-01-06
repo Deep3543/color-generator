@@ -3,19 +3,34 @@ import React from "react";
 const ColorGen = () => {
     return(
         // Image - Container
-        <div className="img-container">
+        <div className="container">
             {/* Title */}
             <h2 className="header">Discrete Colors Image [32,768 colors]</h2>
             {/* Add Color Generator Code */}
-
+            <div className="img-container">
+                <ColorData />
+            </div>
+            
             {/* Add functionality to shuffle colors in the image */}
         </div>
     )
-}
+};
+
 
 const ColorData = () => {
     // Save the Generated colors into colorsGenerated Array
     const colorsGenerated = genColors();
+
+    // Function to generate Discrete Values from the range
+    function DiscreteRange(first, last){
+        var range = [];
+        // loop to generate the values
+        for(let x = first; x <= last; x++){
+            if( (x !== 0) && (x % 8 === 0) ) 
+                range.push(x);
+        }
+        return range;
+    }
 
     // Function to Generate the Colors
     function genColors() {
@@ -26,20 +41,20 @@ const ColorData = () => {
 
         // Loops to generate the colors from the range acquired above
         var colors = [];
-        for(i=0; i <= R.length; i++){
+        for(var i=0; i <= R.length; i++){
             // For Red Values
             const indexR = Math.floor(Math.random() * R.length);
             const valueR = R[indexR];
             R.splice(indexR, 0);
             
             // For Green Values
-            for(j=0; j <= G.length; j++){
+            for(var j=0; j <= G.length; j++){
                 const indexG = Math.floor(Math.random() * G.length);
                 const valueG = G[indexG];
                 G.splice(indexG, 0);
 
                 // For Blue Values
-                for(k=0; k <= B.length; k++){
+                for(var k=0; k <= B.length; k++){
                     const indexB = Math.floor(Math.random() * B.length);
                     const valueB = B[indexB];
                     B.splice(indexB, 0);
@@ -52,5 +67,18 @@ const ColorData = () => {
                 }
             }
         }
+        return colors;
     }
+
+    return(
+        colorsGenerated.map((color, index) => {
+            return(
+                <div>
+                    <div key={index} style={{ backgroundColor: color, width: '5px', height: '5px', padding: '.2px' }} className="color-chunks"></div>
+                </div>
+            )
+        })
+    )
 }
+
+export default ColorGen;
